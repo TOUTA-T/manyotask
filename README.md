@@ -7,7 +7,7 @@
   - タスク名 name:string
   - 期限 deadline:datetime
   - 優先度 priority:string
-  - 詳細 details:text
+  - 詳細 detail:text
   - user_id:integer
   - status:string
 

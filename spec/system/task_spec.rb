@@ -5,7 +5,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成したタスクが表示される' do
         visit new_task_path
         fill_in 'task_name', with:'テストタイトル'
-        fill_in 'task_details', with:'テスト詳細'
+        fill_in 'task_detail', with:'テスト詳細'
         click_on '作成'
         expect(page).to have_content '投稿されました！'
       end
