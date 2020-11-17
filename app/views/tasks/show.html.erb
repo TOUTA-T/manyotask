@@ -1,0 +1,9 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <div class="task-text">
+    <p><strong>タイトル</strong>：<%= @task.name %></p>
+    <p><strong>詳細</strong>：<%= @task.details %></p>
+  </div>
+    <%= link_to '編集', edit_task_path(@task) %> |
+  <%= link_to '戻る', tasks_path %>
+</div>
