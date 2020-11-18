@@ -3,14 +3,16 @@
 <table>
   <thead>
     <tr>
+      <th><%= t('view.index') %></th>
       <th><%= t('view.name') %></th>
       <th><%= t('view.detail') %></th>
       <th><%= t('view.daytime') %></th>
     </tr>
   </thead>
   <tbody>
-    <% @tasks.each do |t| %>
-      <tr>
+    <% @tasks.each_with_index do |t,idx| %>
+      <tr class="task_list">
+        <td><%= idx + 1 %></td>
         <td><%= t.name %></td>
         <td><%= t.detail %></td>
         <td><%= t.created_at.to_s %></td>

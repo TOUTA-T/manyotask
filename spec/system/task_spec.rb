@@ -6,7 +6,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'task_name', with:'テストタイトル'
         fill_in 'task_detail', with:'テスト詳細'
-        click_on '作成'
+        click_on '投稿'
         expect(page).to have_content '投稿されました！'
       end
     end
@@ -14,13 +14,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        # テストで使用するためのタスクを作成
        task = FactoryBot.create(:task, name: 'task')
        visit tasks_path
-       # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
-       # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
        expect(page).to have_content 'task'
-       # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
     end
   end
