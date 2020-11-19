@@ -4,12 +4,12 @@
 ### テーブル設計
 
 - Task テーブル
-  - タスク名 name:string
-  - 期限 deadline:datetime
+  - タスク名 name:string    step1で実装
+  - 期限 deadline:datetime  step3で追加
   - 優先度 priority:string
-  - 詳細 detail:text
+  - 詳細 detail:text        step1で実装
   - user_id:integer
-  - status:string
+  - status:string           step3で追加
 
 - User テーブル
   - name:string

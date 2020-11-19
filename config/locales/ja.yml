@@ -12,6 +12,8 @@ ja:
     title: タイトル
     back: 戻る
     daytime: 作成日時
+    deadline: 期限
+    status: ステータス
     index: 番号
     confilm_delete: 本当に削除しますか？
     input_task: タスク名を入力
