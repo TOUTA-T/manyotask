@@ -19,6 +19,10 @@
     <%= form.label :detail,t('view.input_detail')%><br>
     <%= form.text_area :detail %>
   </div>
+  <div class="field">
+    <%= form.label :deadline,t('view.deadline')%><br>
+    <%= form.date_field :deadline %>
+  </div>
   <div class="actions">
     <%= form.submit t('view.submit') %>
   </div>
