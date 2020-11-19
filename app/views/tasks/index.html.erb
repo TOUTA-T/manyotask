@@ -8,7 +8,8 @@
       <th><%= t('view.detail') %></th>
       <th><%= t('view.daytime') %></th>
       <th><%= t('view.deadline') %><button type="button" class="btn btn-default btn-xs"><%= link_to '近い順', tasks_path(deadline_sort: :true) %></button></th>
-      <th><%= t('view.status') %></th>
+      <th><%= t('view.status') %><button type="button" class="btn btn-default btn-xs"><%= link_to '高い順', tasks_path(status_sort: :true) %></button></th>
+      <th><%= t('view.pri') %></th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
         <td><%= t.created_at.to_s %></td>
         <td><%= t.deadline.to_s(:date) %></td>
         <td><%= t.status %></td>
+        <td><%= t.priority %></td>
         <td><%= link_to t('view.show'), task_path(t) %></td>
         <td><%= link_to t('view.edit'), edit_task_path(t) %></td>
         <td><%= link_to t('view.delete'), task_path(t), method: :delete, data: { confirm: t('view.confilm_delete') } %></td>
@@ -27,4 +29,5 @@
     <% end %>
   </tbody>
 </table>
+<%= form.submit "変更を保存する" %>
 <li><%= link_to t('view.new'), new_task_path %></li>

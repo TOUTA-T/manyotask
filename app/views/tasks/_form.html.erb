@@ -23,6 +23,14 @@
     <%= form.label :deadline,t('view.deadline')%><br>
     <%= form.date_field :deadline %>
   </div>
+  <div class="field">
+    <%= form.label :priority,t('view.pri')%><br>
+    <%= form.select :priority,[["高","高"],["中","中"],["低","低"]], include_blank: "選択して下さい" %>
+  </div>
+  <div class="field">
+    <%= form.label :status,t('view.status')%><br>
+    <%= form.select :status,[["完了","完了"],["着手中","着手中"],["未着手","未着手"]], include_blank: "選択して下さい" %>
+  </div>
   <div class="actions">
     <%= form.submit t('view.submit') %>
   </div>
