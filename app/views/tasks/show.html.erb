@@ -1,9 +1,11 @@
+<h1><%= t('view.detail') %></h1>
+
 <div class="container">
   <p><%= notice %></p>
   <div class="task-text">
-    <p><strong>タイトル</strong>：<%= @task.name %></p>
-    <p><strong>詳細</strong>：<%= @task.detail %></p>
+    <p><strong><%= t('view.title') %></strong>：<%= @task.name %></p>
+    <p><strong><%= t('view.detail') %></strong>：<%= @task.detail %></p>
   </div>
-    <%= link_to '編集', edit_task_path(@task) %> |
-  <%= link_to '戻る', tasks_path %>
+    <%= link_to t('view.edit'), edit_task_path(@task) %>
+    <%= link_to t('view.back'), tasks_path %>
 </div>

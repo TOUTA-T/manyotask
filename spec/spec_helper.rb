@@ -18,6 +18,11 @@ RSpec.configure do |config|
     config.before(:each) do |example|
       driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400], options: { args: ['no-sandbox'] } if example.metadata[:type] == :system
     end
+
+    #factory定義直し
+    config.before(:all) do
+      FactoryBot.reload
+    end
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
