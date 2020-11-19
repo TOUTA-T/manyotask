@@ -1,22 +1,26 @@
-<h1>タスク一覧</h1>
+<h1><%= t('view.task') %></h1>
 <p><%= notice %></p>
 <table>
   <thead>
     <tr>
-      <th>名前</th>
-      <th>詳細</th>
+      <th><%= t('view.index') %></th>
+      <th><%= t('view.name') %></th>
+      <th><%= t('view.detail') %></th>
+      <th><%= t('view.daytime') %></th>
     </tr>
   </thead>
   <tbody>
-    <% @tasks.each do |t| %>
-      <tr>
+    <% @tasks.each_with_index do |t,idx| %>
+      <tr class="task_list">
+        <td><%= idx + 1 %></td>
         <td><%= t.name %></td>
         <td><%= t.detail %></td>
-        <td><%= link_to '詳細確認', task_path(t) %></td>
-        <td><%= link_to '編集', edit_task_path(t) %></td>
-        <td><%= link_to '削除', task_path(t), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+        <td><%= t.created_at.to_s %></td>
+        <td><%= link_to t('view.show'), task_path(t) %></td>
+        <td><%= link_to t('view.edit'), edit_task_path(t) %></td>
+        <td><%= link_to t('view.delete'), task_path(t), method: :delete, data: { confirm: t('view.confilm_delete') } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<li><%= link_to '新規投稿画面へ', new_task_path %></li>
+<li><%= link_to t('view.new'), new_task_path %></li>

@@ -1,0 +1,18 @@
+ja:
+  view:
+    task: タスク
+    name: 名前
+    detail: 詳細
+    new: 新規投稿
+    show: 詳細確認
+    edit: 編集
+    page: ページ
+    delete: 削除
+    submit: 投稿
+    title: タイトル
+    back: 戻る
+    daytime: 作成日時
+    index: 番号
+    confilm_delete: 本当に削除しますか？
+    input_task: タスク名を入力
+    input_detail: 詳細を入力

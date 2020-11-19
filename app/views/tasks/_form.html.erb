@@ -11,10 +11,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.text_field :name, placeholder:"タスク名を入力" %>
-    <%= form.text_area :detail,placeholder:"詳細を入力" %>
+    <%= form.label :name,t('view.input_task') %><br>
+    <%= form.text_field :name %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :detail,t('view.input_detail')%><br>
+    <%= form.text_area :detail %>
   </div>
   <div class="actions">
-    <%= form.submit "作成" %>
+    <%= form.submit t('view.submit') %>
   </div>
 <% end %>
