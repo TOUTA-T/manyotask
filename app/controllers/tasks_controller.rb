@@ -3,14 +3,29 @@ class TasksController < ApplicationController
 
 
   def index
+    # binding.irb
+    if params[:name].present? && params[:status].present?
+      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%") .where(status: "#{params[:status]}")
+    elsif params[:name].present?
+      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
+    elsif params[:status].present?
+      @tasks = Task.where(status: "#{params[:status]}")
+    else
+      @tasks = Task.order(created_at: :desc)
+    end
+
     if params[:deadline_sort]
-      @tasks = Task.order(deadline: :asc)
+      @tasks = @tasks.order(deadline: :asc)
     elsif
       params[:status_sort]
-      @tasks = Task.order(status: :desc)
+      @tasks = @tasks.order(status: :asc)
     else
-      @tasks = Task.all.order(created_at: :desc)
+
     end
+  end
+
+  def search
+
   end
 
   def show
@@ -54,4 +69,5 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name, :detail, :deadline, :status, :priority)
   end
+
 end

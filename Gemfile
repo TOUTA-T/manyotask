@@ -37,7 +37,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 #追加分
 gem 'kaminari', '~> 0.17.0'
-gem 'enum_help'
+# gem 'enum_help'
 
 #Rspec追加分
 

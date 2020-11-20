@@ -1,5 +1,23 @@
 <h1><%= t('view.task') %></h1>
 <p><%= notice %></p>
+<!-- 検索フォーム -->
+<div class="search-form">
+  <%= form_with(model: @task, method: :get, local: true) do |f| %>
+    <div class="field">
+      <%= f.label :name,t('view.input_task') %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :status,t('view.status')%>
+      <%= f.select :status,[["完了","完了"],["着手中","着手中"],["未着手","未着手"]], include_blank: "選択して下さい" %>
+    </div>
+    <div class="actions">
+      <%= f.submit t('view.search') %>
+    </div>
+  <% end %>
+</div>
+
+<!-- テーブル -->
 <table>
   <thead>
     <tr>
@@ -29,5 +47,5 @@
     <% end %>
   </tbody>
 </table>
-<%= form.submit "変更を保存する" %>
+
 <li><%= link_to t('view.new'), new_task_path %></li>

@@ -14,7 +14,6 @@
     <%= form.label :name,t('view.input_task') %><br>
     <%= form.text_field :name %>
   </div>
-  <br>
   <div class="field">
     <%= form.label :detail,t('view.input_detail')%><br>
     <%= form.text_area :detail %>
@@ -24,7 +23,7 @@
     <%= form.date_field :deadline %>
   </div>
   <div class="field">
-    <%= form.label :priority,t('view.pri')%><br>
+    <%= form.label :priority,t('view.pri')%>
     <%= form.select :priority,[["高","高"],["中","中"],["低","低"]], include_blank: "選択して下さい" %>
   </div>
   <div class="field">

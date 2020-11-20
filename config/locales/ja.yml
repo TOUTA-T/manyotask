@@ -16,6 +16,7 @@ ja:
     status: ステータス
     index: 番号
     pri: 優先度
+    search: 検索する
     confilm_delete: 本当に削除しますか？
     input_task: タスク名を入力
     input_detail: 詳細を入力
