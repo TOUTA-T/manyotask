@@ -3,13 +3,18 @@ class TasksController < ApplicationController
 
 
   def index
-    # binding.irb
+    #controller検索→ 検索機能をモデルにつけている
+    @tasks = Task.all
+
     if params[:name].present? && params[:status].present?
-      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%") .where(status: "#{params[:status]}")
+      @tasks = @tasks.double params[:name],params[:status]
+      # Task.where('name LIKE ?', "%#{params[:name]}%") .where(status: "#{params[:status]}")
     elsif params[:name].present?
-      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
+      @tasks = @tasks.name_like params[:name]
+      # Task.where('name LIKE ?', "%#{params[:name]}%")
     elsif params[:status].present?
-      @tasks = Task.where(status: "#{params[:status]}")
+      @tasks = @tasks.status params[:status]
+      # Task.where(status: "#{params[:status]}")
     else
       @tasks = Task.order(created_at: :desc)
     end
