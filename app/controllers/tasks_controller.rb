@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   def index
     #controller検索→ 検索機能をモデルにつけている
-    @tasks = Task.all
+    @tasks = Task.all.kaminari_page(params[:page])
 
     if params[:name].present? && params[:status].present?
       @tasks = @tasks.double params[:name],params[:status]
@@ -16,14 +16,14 @@ class TasksController < ApplicationController
       @tasks = @tasks.status params[:status]
       # Task.where(status: "#{params[:status]}")
     else
-      @tasks = Task.order(created_at: :desc)
+      @tasks = Task.kaminari_page(params[:page]).order(created_at: :desc)
     end
 
     if params[:deadline_sort]
-      @tasks = @tasks.order(deadline: :asc)
+      @tasks = @tasks.kaminari_page(params[:page]).order(deadline: :asc)
     elsif
       params[:status_sort]
-      @tasks = @tasks.order(status: :asc)
+      @tasks = @tasks.kaminari_page(params[:page]).order(status: :asc)
     else
 
     end
@@ -72,7 +72,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :detail, :deadline, :status, :priority)
+    params.require(:task).permit(:name, :detail, :deadline, :status, :priority, :page)
   end
 
 end
