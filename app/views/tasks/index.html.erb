@@ -1,33 +1,34 @@
-<h1><%= t('view.task') %></h1>
+<div class="page-header">
+<h1><%= t('views.task') %></h1>
+</div>
+
 <p><%= notice %></p>
 <!-- 検索フォーム -->
 <div class="search-form">
   <%= form_with(model: @task, method: :get, local: true) do |f| %>
     <div class="field">
-      <%= f.label :name,t('view.input_task') %>
+      <%= f.label :name,t('views.input_task') %>
       <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label :status,t('view.status')%>
+      <%= f.label :status,t('views.status')%>
       <%= f.select :status,[["完了","完了"],["着手中","着手中"],["未着手","未着手"]], include_blank: "選択して下さい" %>
     </div>
     <div class="actions">
-      <%= f.submit t('view.search') %>
+      <%= f.submit t('views.search') %>
     </div>
   <% end %>
 </div>
 
 <!-- テーブル -->
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th><%= t('view.index') %></th>
-      <th><%= t('view.name') %></th>
-      <th><%= t('view.detail') %></th>
-      <th><%= t('view.daytime') %></th>
-      <th><%= t('view.deadline') %><button type="button" class="btn btn-default btn-xs"><%= link_to '近い順', tasks_path(deadline_sort: :true) %></button></th>
-      <th><%= t('view.status') %><button type="button" class="btn btn-default btn-xs"><%= link_to '高い順', tasks_path(status_sort: :true) %></button></th>
-      <th><%= t('view.pri') %></th>
+      <th><%= t('views.index') %></th>
+      <th><%= t('views.name') %></th>
+      <th><%= t('views.detail') %></th>
+      <th><%= t('views.daytime') %></th>
+      <th><%= t('views.deadline') %><button type="button" class="btn btn-default btn-xs"><%= link_to '近い順', tasks_path(deadline_sort: :true) %></button></th>
+      <th><%= t('views.status') %><button type="button" class="btn btn-default btn-xs"><%= link_to '高い順', tasks_path(status_sort: :true) %></button></th>
+      <th><%= t('views.pri') %></th>
     </tr>
   </thead>
   <tbody>
@@ -40,13 +41,16 @@
         <td><%= t.deadline.to_s(:date) %></td>
         <td><%= t.status %></td>
         <td><%= t.priority %></td>
-        <td><%= link_to t('view.show'), task_path(t) %></td>
-        <td><%= link_to t('view.edit'), edit_task_path(t) %></td>
-        <td><%= link_to t('view.delete'), task_path(t), method: :delete, data: { confirm: t('view.confilm_delete') } %></td>
+          <div class="btn-group" role="group">
+        <td> <button type="button" class="btn btn-default"><%= link_to t('views.show'), task_path(t) %></button>
+        <button type="button" class="btn btn-default"><%= link_to t('views.edit'), edit_task_path(t) %></button>
+        <button type="button" class="btn btn-default"><%= link_to t('views.delete'), task_path(t), method: :delete, data: { confirm: t('views.confilm_delete') } %></td>
+          </div>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<li><%= link_to t('view.new'), new_task_path %></li>
+<li><%= link_to t('views.new'), new_task_path %></li>
+
 <%= paginate @tasks %>
