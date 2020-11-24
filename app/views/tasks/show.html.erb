@@ -1,11 +1,13 @@
-<h1><%= t('view.detail') %></h1>
+<div class="page-header">
+<h1><%= t('views.detail') %></h1>
+</div>
 
 <div class="container">
   <p><%= notice %></p>
   <div class="task-text">
-    <p><strong><%= t('view.title') %></strong>：<%= @task.name %></p>
-    <p><strong><%= t('view.detail') %></strong>：<%= @task.detail %></p>
+    <p><strong><%= t('views.title') %></strong>：<%= @task.name %></p>
+    <p><strong><%= t('views.detail') %></strong>：<%= @task.detail %></p>
   </div>
-    <%= link_to t('view.edit'), edit_task_path(@task) %>
-    <%= link_to t('view.back'), tasks_path %>
+    <%= link_to t('views.edit'), edit_task_path(@task) %>
+    <%= link_to t('views.back'), tasks_path %>
 </div>
