@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
+#追加分
+gem 'kaminari'
+# gem 'enum_help'
 
 #Rspec追加分
 
@@ -58,6 +61,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

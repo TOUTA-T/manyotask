@@ -1,11 +1,17 @@
-<h1><%= t('view.detail') %></h1>
+<div class="page-header">
+<h1><%= t('views.detail') %></h1>
+</div>
 
 <div class="container">
   <p><%= notice %></p>
-  <div class="task-text">
-    <p><strong><%= t('view.title') %></strong>：<%= @task.name %></p>
-    <p><strong><%= t('view.detail') %></strong>：<%= @task.detail %></p>
+  <div class="list-group">
+    <a class="list-group-item"><%= t('views.title') %>：<%= @task.name %></a>
+    <a class="list-group-item"><%= t('views.detail') %>：<%= @task.detail %></a>
+    <a class="list-group-item"><%= t('views.daytime') %>：<%= @task.created_at.to_s %></a>
+    <a class="list-group-item"><%= t('views.deadline') %>：<%= @task.deadline.to_s(:date) %></a>
+    <a class="list-group-item"><%= t('views.status') %>：<%= @task.status %></a>
+    <a class="list-group-item"><%= t('views.pri') %>：<%= @task.priority %></a>
   </div>
-    <%= link_to t('view.edit'), edit_task_path(@task) %>
-    <%= link_to t('view.back'), tasks_path %>
+    <%= link_to t('views.edit'), edit_task_path(@task) %>
+    <%= link_to t('views.back'), tasks_path %>
 </div>

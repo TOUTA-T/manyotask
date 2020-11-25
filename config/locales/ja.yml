@@ -1,5 +1,5 @@
 ja:
-  view:
+  views:
     task: タスク
     name: 名前
     detail: 詳細
@@ -12,7 +12,17 @@ ja:
     title: タイトル
     back: 戻る
     daytime: 作成日時
+    deadline: 期限
+    status: ステータス
     index: 番号
+    pri: 優先度
+    search: 検索する
     confilm_delete: 本当に削除しますか？
     input_task: タスク名を入力
     input_detail: 詳細を入力
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."

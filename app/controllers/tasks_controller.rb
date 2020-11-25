@@ -1,8 +1,36 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    #controller検索→ 検索機能をモデルにつけている
+    @tasks = Task.all.kaminari_page(params[:page])
+
+    if params[:name].present? && params[:status].present?
+      @tasks = @tasks.double params[:name],params[:status]
+      # Task.where('name LIKE ?', "%#{params[:name]}%") .where(status: "#{params[:status]}")
+    elsif params[:name].present?
+      @tasks = @tasks.name_like params[:name]
+      # Task.where('name LIKE ?', "%#{params[:name]}%")
+    elsif params[:status].present?
+      @tasks = @tasks.status params[:status]
+      # Task.where(status: "#{params[:status]}")
+    else
+      @tasks = Task.kaminari_page(params[:page]).order(created_at: :desc)
+    end
+
+    if params[:deadline_sort]
+      @tasks = @tasks.kaminari_page(params[:page]).order(deadline: :asc)
+    elsif
+      params[:status_sort]
+      @tasks = @tasks.kaminari_page(params[:page]).order(status: :asc)
+    else
+
+    end
+  end
+
+  def search
+
   end
 
   def show
@@ -44,6 +72,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :detail)
+    params.require(:task).permit(:name, :detail, :deadline, :status, :priority, :page)
   end
+
 end

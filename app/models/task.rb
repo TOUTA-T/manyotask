@@ -1,6 +1,8 @@
 class Task < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
   validates :detail, presence: true
-  # 並び替えはこちらでもできるが、保守性の観点でモデルのデフォルトにするのは▲
-  # default_scope -> { order(created_at: :desc)}
+
+  scope :name_like, -> (name) { where('name LIKE ?',  "%#{name}%") }
+  scope :status, -> (status) { where(status: "#{status}") }
+  scope :double, -> (name, status) { where('name LIKE ?',  "%#{name}%").where(status: "#{status}")}
 end
