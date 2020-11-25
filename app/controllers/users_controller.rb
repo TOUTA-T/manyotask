@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :autenticate_user, only: [:edit, :update, :destroy]
+
   def new
     @user = User.new
   end
@@ -13,13 +16,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts
+
   end
 
   def edit
-    if @current_user.id !=  params[:id].to_i
-      redirect_to new_session_path, notice: '編集権限がありません'
-    end
+
   end
 
   private

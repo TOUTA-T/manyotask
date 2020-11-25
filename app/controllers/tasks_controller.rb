@@ -1,20 +1,18 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-
+  before_action :autenticate_user, only: [:edit, :update, :destroy]
 
   def index
-    #controller検索→ 検索機能をモデルにつけている
+    unless @current_user
+      redirect_to new_session_path, notice: 'ログインしていないと、一覧は見れません'
+    end
     @tasks = Task.all.kaminari_page(params[:page])
-
     if params[:name].present? && params[:status].present?
       @tasks = @tasks.double params[:name],params[:status]
-      # Task.where('name LIKE ?', "%#{params[:name]}%") .where(status: "#{params[:status]}")
     elsif params[:name].present?
       @tasks = @tasks.name_like params[:name]
-      # Task.where('name LIKE ?', "%#{params[:name]}%")
     elsif params[:status].present?
       @tasks = @tasks.status params[:status]
-      # Task.where(status: "#{params[:status]}")
     else
       @tasks = Task.kaminari_page(params[:page]).order(created_at: :desc)
     end
@@ -41,15 +39,23 @@ class TasksController < ApplicationController
   end
 
   def edit
-
+    if @post.user == current_user
+     render "edit"
+    else
+     redirect_to new_session_path, notice: '編集権限がありません'
+ end
   end
 
   def create
-    @task = Task.new(task_params)
-    if @task.save
-      redirect_to task_path(@task), notice:"投稿されました！"
-    else
+    @task = @current_user.tasks.build(task_params)
+    if params[:back]
       render :new
+    else
+      if @task.save
+        redirect_to task_path(@task), notice:"投稿されました！"
+      else
+        render :new
+      end
     end
   end
 
