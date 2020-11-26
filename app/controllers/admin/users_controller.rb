@@ -1,12 +1,15 @@
-class UsersController < ApplicationController
+class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :autenticate_user, only: [:edit, :update, :destroy]
 
+  def index
+    @users = User.select(:id, :name)
+  end
+
   def new
     if @current_user
-      redirect_to tasks_path, notice: 'ログイン中は新規ユーザー登録は出来ません。ログアウトして下さい。'
-    end
     @user = User.new
+    end
   end
 
   def create
@@ -21,9 +24,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    if @user != @current_user
-      redirect_to tasks_path, notice: '他の人のマイページは見れません'
-    end
   end
 
   def edit

@@ -1,0 +1,30 @@
+<h1>プロフィール編集ページ</h1>
+
+<%= form_with(model: @user, local: true) do |form| %>
+
+<div class="field">
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</div>
+
+<div class="field">
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+</div>
+
+<div class="field">
+  <%= form.label :password %>
+  <%= form.password_field :password ,placeholder:"パスワードを入力"%>
+</div>
+
+<div class="field">
+  <%= form.label :password_confirmation, "パスワードを確認入力" %>
+  <%= form.password_field :password_confirmation %>
+</div>
+
+<div class="actions">
+  <%= form.submit "パスワードを入力して、保存" %>
+</div>
+
+<% end %>
+<%= link_to 'Back', user_path %>
