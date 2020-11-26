@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :tasks
   resources :users, only: [:new, :create, :show, :edit]
   namespace :admin do
-    resources :users
+    resources :users do
+      collection do
+        get 'change'
+      end
+    end
   end
   root'tasks#index'
 end

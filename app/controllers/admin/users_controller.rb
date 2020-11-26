@@ -3,12 +3,13 @@ class Admin::UsersController < ApplicationController
   before_action :autenticate_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.select(:id, :name)
+    @users = User.select(:id, :name, :admin)
+    @users = @users.order(id: :asc)
   end
 
   def new
     if @current_user
-    @user = User.new
+      @user = User.new
     end
   end
 
@@ -21,6 +22,17 @@ class Admin::UsersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def change
+    @user = User.find(params[:user])
+    if @user.admin == true
+      @user.admin = false
+    else
+      @user.admin = true
+    end
+    @user.save
+    redirect_to admin_users_path, notice:"権限を変更しました"
   end
 
   def show
@@ -48,7 +60,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-  params.require(:user).permit(:name, :email, :password,:password_confirmation)
+  params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
 end
