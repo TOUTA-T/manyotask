@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     unless @current_user
       redirect_to new_session_path, notice: 'ログインしていないと、一覧は見れません'
     end
-    @tasks = Task.all.kaminari_page(params[:page])
+    @tasks = current_user.tasks.kaminari_page(params[:page])
     if params[:name].present? && params[:status].present?
       @tasks = @tasks.double params[:name],params[:status]
     elsif params[:name].present?
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
     elsif params[:status].present?
       @tasks = @tasks.status params[:status]
     else
-      @tasks = Task.kaminari_page(params[:page]).order(created_at: :desc)
+      @tasks = @tasks.order(created_at: :desc)
     end
 
     if params[:deadline_sort]
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    if @post.user == current_user
+    if @task.user == @current_user
      render "edit"
     else
      redirect_to new_session_path, notice: '編集権限がありません'
@@ -47,14 +47,18 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @current_user.tasks.build(task_params)
-    if params[:back]
-      render :new
+    unless @current_user
+      redirect_to new_session_path, notice: 'ログインしていないと、投稿できません'
     else
-      if @task.save
-        redirect_to task_path(@task), notice:"投稿されました！"
-      else
+      @task = @current_user.tasks.build(task_params)
+      if params[:back]
         render :new
+      else
+        if @task.save
+          redirect_to task_path(@task), notice:"投稿されました！"
+        else
+          render :new
+        end
       end
     end
   end

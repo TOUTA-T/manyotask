@@ -1,11 +1,12 @@
 class SessionsController < ApplicationController
   def new
+
   end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      session[:user_id] = user.id #クッキーに暗号化ユーザーIDが自動で生成
+      session[:user_id] = user.id
       redirect_to user_path(user.id) #OKならuserの方にリダイレクトさせる
     else
       flash.now[:danger] = 'ログインに失敗しました'
