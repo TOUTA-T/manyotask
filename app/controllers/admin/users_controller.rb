@@ -3,8 +3,12 @@ class Admin::UsersController < ApplicationController
   before_action :autenticate_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.select(:id, :name, :admin)
-    @users = @users.order(id: :asc)
+    if current_user.admin?
+      @users = User.select(:id, :name, :admin)
+      @users = @users.order(id: :asc)
+    else
+      redirect_to tasks_path, notice: '管理者以外はアクセスできません'
+    end
   end
 
   def new

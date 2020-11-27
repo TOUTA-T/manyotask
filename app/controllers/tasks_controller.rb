@@ -5,25 +5,25 @@ class TasksController < ApplicationController
   def index
     unless @current_user
       redirect_to new_session_path, notice: 'ログインしていないと、一覧は見れません'
-    end
-    @tasks = current_user.tasks.kaminari_page(params[:page])
-    if params[:name].present? && params[:status].present?
-      @tasks = @tasks.double params[:name],params[:status]
-    elsif params[:name].present?
-      @tasks = @tasks.name_like params[:name]
-    elsif params[:status].present?
-      @tasks = @tasks.status params[:status]
     else
-      @tasks = @tasks.order(created_at: :desc)
-    end
+      @tasks = current_user.tasks.kaminari_page(params[:page])
+      if params[:name].present? && params[:status].present?
+        @tasks = @tasks.double params[:name],params[:status]
+      elsif params[:name].present?
+        @tasks = @tasks.name_like params[:name]
+      elsif params[:status].present?
+        @tasks = @tasks.status params[:status]
+      else
+        @tasks = @tasks.order(created_at: :desc)
+      end
 
-    if params[:deadline_sort]
-      @tasks = @tasks.kaminari_page(params[:page]).order(deadline: :asc)
-    elsif
-      params[:status_sort]
-      @tasks = @tasks.kaminari_page(params[:page]).order(status: :asc)
-    else
-
+      if params[:deadline_sort]
+        @tasks = @tasks.kaminari_page(params[:page]).order(deadline: :asc)
+      elsif
+        params[:status_sort]
+        @tasks = @tasks.kaminari_page(params[:page]).order(status: :asc)
+      else
+      end
     end
   end
 
