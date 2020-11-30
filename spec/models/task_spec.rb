@@ -1,12 +1,14 @@
 require 'rails_helper'
 describe 'タスクモデル機能', type: :model do
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
+    user = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user2)
+    FactoryBot.create(:task, user: user)
+    FactoryBot.create(:second_task, user: user2 )
   end
   describe 'バリデーションのテスト' do
     context 'タスクのタイトルが空の場合' do
-      it 'バリデーションにひっかる' do
+      it 'バリデーションにひっかかる' do
         task = Task.new(name: '', detail: '失敗テスト')
         expect(task).not_to be_valid
       end
@@ -19,7 +21,7 @@ describe 'タスクモデル機能', type: :model do
     end
     context 'タスクのタイトルと詳細に内容が記載されている場合' do
       it 'バリデーションが通る' do
-        task = Task.new(name: '成功タイトル', detail: '成功テスト')
+        task = Task.new(name: '成功タイトル', detail: '成功テスト', user_id: 1 )
         expect(task).to be_valid
       end
     end

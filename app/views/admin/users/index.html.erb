@@ -1,0 +1,42 @@
+<div class="page-header">
+<h1>管理画面のユーザー一覧</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('views.index') %></th>
+      <th><%= t('views.name') %></th>
+      <th>タスク数</th>
+      <th>管理者権限</th>
+      <th>権限変更</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+    <tr class="task_list">
+      <td><%= u.id %></td>
+      <td><%= u.name %></td>
+      <td><%= u.tasks.count %></td>
+        <% if u.admin == true %>
+        <td>『 ◯ 』</td>
+        <td><%= link_to '解除', change_admin_users_path(user: u.id), class: 'btn btn-default' %></td>
+        <% else %>
+        <td>『 ☓ 』</td>
+        <td><%= link_to '付与', change_admin_users_path(user: u.id), class: 'btn btn-primary' %></td>
+        <% end %>
+
+      <div class="btn-group" role="group">
+        <td><button type="button" class="btn btn-default"><%= link_to '詳細', admin_user_path(u) %></button>
+            <button type="button" class="btn btn-default"><%= link_to '編集', [:edit, :admin, u] %></button>
+            <button type="button" class="btn btn-default"><%= link_to '削除', [:admin, u], method: :delete, data: { confirm: t('views.confilm_delete') } %>
+        </td>
+      </div>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-default">
+<%= link_to "新規ユーザー登録", new_admin_user_path %>
+</button>
