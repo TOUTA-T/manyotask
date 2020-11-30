@@ -28,8 +28,8 @@
 
       <div class="btn-group" role="group">
         <td><button type="button" class="btn btn-default"><%= link_to '詳細', admin_user_path(u) %></button>
-            <button type="button" class="btn btn-default"><%= link_to '編集', edit_admin_user_path(u) %></button>
-            <button type="button" class="btn btn-default"><%= link_to '削除', admin_user_path(u), method: :delete, data: { confirm: t('views.confilm_delete') } %>
+            <button type="button" class="btn btn-default"><%= link_to '編集', [:edit, :admin, u] %></button>
+            <button type="button" class="btn btn-default"><%= link_to '削除', [:admin, u], method: :delete, data: { confirm: t('views.confilm_delete') } %>
         </td>
       </div>
     </tr>

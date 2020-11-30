@@ -22,7 +22,7 @@ class Admin::UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "#{@user.name}でログインしました！"
-      redirect_to user_path(@user.id)
+      redirect_to [:admin, @user]
     else
       render :new
     end
@@ -47,7 +47,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path, notice:"編集は正常に行われました"
+      redirect_to [:admin, @user], notice:"会員権限で更新されました"
     else
       render :edit
     end
@@ -55,7 +55,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-      redirect_to admin_users_path, notice:"削除しました"
+      redirect_to [:admin, @user], notice:"会員権限で削除しました"
   end
 
   private
