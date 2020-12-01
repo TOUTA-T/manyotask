@@ -3,6 +3,17 @@
 <h2 class="panel-title">email:<%= @user.email %></h2>
 </div>
 
+<% @user.tasks.each do |task| %>
+  <tr>
+    <td><%= task.name %></td>
+    <td>
+      <% task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+
 <div>
 <button type="button" class="btn btn-info">
 <%= link_to 'プロフィール編集', [:edit, :admin, @user] %></button>

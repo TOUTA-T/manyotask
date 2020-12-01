@@ -6,4 +6,6 @@ class Task < ApplicationRecord
   scope :status, -> (status) { where(status: "#{status}") }
   scope :double, -> (name, status) { where('name LIKE ?',  "%#{name}%").where(status: "#{status}")}
   belongs_to :user
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings
 end

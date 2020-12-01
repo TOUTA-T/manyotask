@@ -13,6 +13,8 @@ class TasksController < ApplicationController
         @tasks = @tasks.name_like params[:name]
       elsif params[:status].present?
         @tasks = @tasks.status params[:status]
+      elsif params[:label_id].present?
+        @tasks =  @tasks.joins(:labels).where(labels: { id: params[:label_id] })
       else
         @tasks = @tasks.order(created_at: :desc)
       end
@@ -82,7 +84,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :detail, :deadline, :status, :priority, :page)
+    params.require(:task).permit(:name, :detail, :deadline, :status, :priority, :page, { label_ids: [] })
   end
 
 end
