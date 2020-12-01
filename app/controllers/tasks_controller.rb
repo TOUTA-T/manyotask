@@ -37,7 +37,11 @@ class TasksController < ApplicationController
   end
 
   def new
+    unless @current_user
+      redirect_to new_session_path, notice: 'ログインしていないと、投稿は出来ません'
+    else
     @task = Task.new
+    end
   end
 
   def edit
