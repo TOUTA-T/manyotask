@@ -1,5 +1,5 @@
 <div class="page-header">
-<h1><%= t('views.detail') %></h1>
+<h1>詳細確認</h1>
 </div>
 
 <div class="container">
@@ -11,6 +11,10 @@
     <a class="list-group-item"><%= t('views.deadline') %>：<%= @task.deadline.to_s(:date) %></a>
     <a class="list-group-item"><%= t('views.status') %>：<%= @task.status %></a>
     <a class="list-group-item"><%= t('views.pri') %>：<%= @task.priority %></a>
+    <a class="list-group-item">
+      <% @task.labels.each do |label| %>
+        ラベル:<%= label.name %><br>
+      <% end %></a>
   </div>
     <%= link_to t('views.edit'), edit_task_path(@task) %>
     <%= link_to t('views.back'), tasks_path %>
